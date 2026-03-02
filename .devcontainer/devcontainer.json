@@ -1,0 +1,29 @@
+{
+    "name": "CSAPP Experiment Environment",
+    "dockerComposeFile": [
+        "../docker-compose.yml"
+    ],
+    "service": "csapp",
+    "workspaceFolder": "/workspace",
+    
+    // 我们容器内的默认用户就是 csapp
+    "remoteUser": "csapp",
+
+    // 在容器内部安装这些 VS Code 的插件，提供极致的 C/C++ 编写和调试体验
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",             // 微软官方 C/C++ 语言支持 (代码补全、语法高亮)
+                "ms-vscode.cpptools-extension-pack", // 包含 CMake 等工具增强
+                "ms-vscode.hexeditor",            // 二进制 Hex 编辑器 (CSAPP 查内存很有用)
+                "vadimcn.vscode-lldb"             // 现代化的调试器前端支持 (虽然主要用 GDB)
+            ],
+            "settings": {
+                // 确保 VS Code 知道我们在 Linux 下，使用 GCC 格式
+                "C_Cpp.default.intelliSenseMode": "linux-gcc-x64",
+                "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+                "editor.formatOnSave": true
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  csapp:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: csapp-env
+    # 将本地的 workspace 目录挂载到容器内的 /workspace 目录，方便在本机修改代码后在容器编译
+    volumes:
+      - ./workspace:/workspace
+    # 保持容器持续运行
+    tty: true
+    stdin_open: true
+    # 这一块很重要：允许 GDB 等调试工具在 Docker 内正确运行，无视系统的 ptrace 限制
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
